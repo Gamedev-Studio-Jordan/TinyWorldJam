@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://uk8tnukstm6d"]
+
+[ext_resource type="Script" uid="uid://gk6l6wxkwpj" path="res://scripts/destructible_object.gd" id="1_4ptq8"]
+[ext_resource type="PackedScene" uid="uid://dwfx2yrkg860b" path="res://models/objects/box.glb" id="1_f7g2b"]
+[ext_resource type="Script" uid="uid://l1g0d20ywk1x" path="res://addons/destruction/destruction.gd" id="2_4ptq8"]
+[ext_resource type="PackedScene" uid="uid://b4vqa2kyvf13b" path="res://models/objects/box_fractured.glb" id="3_sb12i"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1c2mv"]
+points = PackedVector3Array(-1, 0.76361, -1, -1, 2.76361, -1, 1, 0.76361, -1, -1, 0.76361, 1, -1, 2.76361, 1, 1, 2.76361, -1, 1, 0.76361, 1, 1, 2.76361, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hsoxx"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_f7g2b"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("destruction_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.231752, 4.52151, 0.327742)
+script = ExtResource("1_4ptq8")
+destruction_node = NodePath("Destruction")
+
+[node name="box" parent="RigidBody3D" instance=ExtResource("1_f7g2b")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_1c2mv")
+
+[node name="Destruction" type="Node" parent="RigidBody3D" node_paths=PackedStringArray("shard_container")]
+script = ExtResource("2_4ptq8")
+fragmented = ExtResource("3_sb12i")
+shard_container = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.913744, 0.40629, 0, -0.40629, 0.913744, 0.39918, 11.4687, 8.8455)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11756, 18.6527, 21.5102)
+light_energy = 11.02
+omni_range = 4096.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="LevelPlane" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(46.2006, 0, 0, 0, 1, 0, 0, 0, 50.1298, 0, 0, 0)
+mesh = SubResource("PlaneMesh_hsoxx")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(46.2006, 0, 0, 0, 1, 0, 0, 0, 50.1298, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_f7g2b")

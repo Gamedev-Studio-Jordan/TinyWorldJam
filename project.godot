@@ -14,6 +14,10 @@ config/name="New Game Project"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[editor_plugins]
+
+enabled=PackedStringArray()
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
