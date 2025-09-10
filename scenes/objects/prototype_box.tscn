@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4pmlvley572"]
+
+[ext_resource type="Script" uid="uid://gk6l6wxkwpj" path="res://scripts/destructible_object.gd" id="1_ldgtc"]
+[ext_resource type="PackedScene" uid="uid://dwfx2yrkg860b" path="res://models/objects/box.glb" id="2_rvbls"]
+[ext_resource type="Script" uid="uid://l1g0d20ywk1x" path="res://addons/destruction/destruction.gd" id="3_5h37w"]
+[ext_resource type="PackedScene" uid="uid://b4vqa2kyvf13b" path="res://models/objects/box_fractured.glb" id="4_b8jkc"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1c2mv"]
+points = PackedVector3Array(-1, 0.76361, -1, -1, 2.76361, -1, 1, 0.76361, -1, -1, 0.76361, 1, -1, 2.76361, 1, 1, 2.76361, -1, 1, 0.76361, 1, 1, 2.76361, 1)
+
+[node name="PrototypeBox" type="RigidBody3D" node_paths=PackedStringArray("destruction_node") groups=["destructible"]]
+script = ExtResource("1_ldgtc")
+destruction_node = NodePath("Destruction")
+explosion_power = 5.0
+
+[node name="box" parent="." instance=ExtResource("2_rvbls")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_1c2mv")
+
+[node name="Destruction" type="Node" parent="." node_paths=PackedStringArray("shard_container")]
+script = ExtResource("3_5h37w")
+fragmented = ExtResource("4_b8jkc")
+shard_container = NodePath("")

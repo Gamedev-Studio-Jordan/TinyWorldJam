@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://uk8tnukstm6d"]
+
+[ext_resource type="Script" uid="uid://dgwou8bpt2huj" path="res://scripts/test_scripts/object_test_level.gd" id="1_61new"]
+[ext_resource type="PackedScene" uid="uid://c4pmlvley572" path="res://scenes/objects/prototype_box.tscn" id="2_rr23r"]
+
+[sub_resource type="Environment" id="Environment_4ptq8"]
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ptq8"]
+albedo_color = Color(0, 0.282353, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hsoxx"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_f7g2b"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="TestLevel" type="Node3D"]
+script = ExtResource("1_61new")
+
+[node name="PrototypeBox" parent="." instance=ExtResource("2_rr23r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.231752, 4.52151, 0.327742)
+
+[node name="PrototypeBox2" parent="." instance=ExtResource("2_rr23r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.56769, 8.35524, -12.2109)
+
+[node name="PrototypeBox3" parent="." instance=ExtResource("2_rr23r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7394, 8.35524, -10.4635)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.913744, 0.40629, 0, -0.40629, 0.913744, 0.39918, 9.15255, 12.1846)
+environment = SubResource("Environment_4ptq8")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11756, 18.6527, 21.5102)
+light_energy = 11.02
+omni_range = 4096.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="LevelPlane" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(46.2006, 0, 0, 0, 1, 0, 0, 0, 50.1298, 0, 0, 0)
+material_overlay = SubResource("StandardMaterial3D_4ptq8")
+mesh = SubResource("PlaneMesh_hsoxx")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(46.2006, 0, 0, 0, 1, 0, 0, 0, 50.1298, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_f7g2b")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DestroyButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.444
+anchor_top = 0.924
+anchor_right = 0.552
+anchor_bottom = 1.0
+offset_left = 0.511963
+offset_top = 0.247986
+offset_right = 0.0959473
+grow_horizontal = 2
+grow_vertical = 0
+text = "Destroy"
+
+[connection signal="pressed" from="CanvasLayer/Control/DestroyButton" to="." method="_on_destroy_button_pressed"]
