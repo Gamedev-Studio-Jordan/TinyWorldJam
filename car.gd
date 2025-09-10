@@ -53,6 +53,9 @@ func _physics_process(delta: float) -> void:
 		surface_basis.y = up_direction
 		surface_basis.z = corrected_forward
 		
+		if car.global_position.y - gravity_centre.y <= 0:
+			surface_basis.z = -surface_basis.z
+			
 		force = surface_basis * Vector3(0, 0, -speed_force)
 
 		car_mesh.global_transform.basis = Basis(surface_basis.x, -surface_basis.y, surface_basis.z)
