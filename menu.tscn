@@ -1,10 +1,10 @@
 [gd_scene load_steps=28 format=4 uid="uid://nurgk2ry3dbf"]
 
 [ext_resource type="PackedScene" uid="uid://c32ylt1y2eh33" path="res://Assets/Jeep_done.fbx" id="1_lti8b"]
-[ext_resource type="Script" uid="uid://bkj6m83fmvssx" path="res://jeep_animation.gd" id="2_4hy44"]
+[ext_resource type="Script" path="res://jeep_animation.gd" id="2_4hy44"]
 [ext_resource type="PackedScene" uid="uid://h7ufo65tjtpx" path="res://Assets/grass.glb" id="2_mae5d"]
 [ext_resource type="Shader" uid="uid://cccnqbhqr12he" path="res://grass.tres" id="3_4hy44"]
-[ext_resource type="Script" uid="uid://chc5376flolkj" path="res://menu.gd" id="5_ytr4m"]
+[ext_resource type="Script" path="res://menu.gd" id="5_ytr4m"]
 
 [sub_resource type="Animation" id="Animation_l48gv"]
 length = 0.001
