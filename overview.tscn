@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5r5w1kckcc6p"]
+[gd_scene load_steps=6 format=3 uid="uid://bitww0b13hvwl"]
 
-[ext_resource type="PackedScene" uid="uid://dlpvj2moncf7p" path="res://car.tscn" id="1_uhe7o"]
-[ext_resource type="PackedScene" uid="uid://c1efraxy8iyel" path="res://planet.tscn" id="2_c1k4s"]
+[ext_resource type="PackedScene" uid="uid://cmoegd3ikx2bm" path="res://car.tscn" id="1_uhe7o"]
+[ext_resource type="PackedScene" uid="uid://ccfjskdcd24po" path="res://planet.tscn" id="2_c1k4s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_of7x6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -25,6 +25,7 @@ shadow_enabled = true
 environment = SubResource("Environment_c1k4s")
 
 [node name="Planet" parent="." instance=ExtResource("2_c1k4s")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, -5, 0)
 
 [node name="Car" parent="." instance=ExtResource("1_uhe7o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 53.7248, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.4885, 0)

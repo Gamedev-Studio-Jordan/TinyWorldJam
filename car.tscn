@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlpvj2moncf7p"]
+[gd_scene load_steps=5 format=3 uid="uid://cmoegd3ikx2bm"]
 
 [ext_resource type="Script" uid="uid://d1anmt1gueqsr" path="res://car.gd" id="1_uoj53"]
 [ext_resource type="PackedScene" uid="uid://8hchh38rffnq" path="res://Car.fbx" id="2_k61xc"]
+[ext_resource type="Script" uid="uid://bevp5jme6piw0" path="res://line3d.gd" id="3_k61xc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uhe7o"]
 radius = 0.1
 
-[node name="Car" type="RigidBody3D"]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("debug_force_line")]
 linear_damp = 6.0
 script = ExtResource("1_uoj53")
+debug_force = true
+debug_force_line = NodePath("Line3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_uhe7o")
@@ -21,5 +24,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Car"]
 transform = Transform3D(-1, 2.99003e-08, -8.21505e-08, 0, 0.939693, 0.34202, 8.74228e-08, 0.34202, -0.939693, 0, 3, -5)
+
+[node name="Line3D" type="MeshInstance3D" parent="."]
+top_level = true
+skeleton = NodePath("../Car")
+script = ExtResource("3_k61xc")
+metadata/_custom_type_script = "uid://bevp5jme6piw0"
 
 [editable path="Car"]
