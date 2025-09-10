@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlpvj2moncf7p"]
+
+[ext_resource type="Script" uid="uid://d1anmt1gueqsr" path="res://car.gd" id="1_uoj53"]
+[ext_resource type="PackedScene" uid="uid://8hchh38rffnq" path="res://Car.fbx" id="2_k61xc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uhe7o"]
+radius = 0.1
+
+[node name="Car" type="RigidBody3D"]
+linear_damp = 6.0
+script = ExtResource("1_uoj53")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_uhe7o")
+
+[node name="Car" parent="." instance=ExtResource("2_k61xc")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Car" parent="Car" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Car"]
+transform = Transform3D(-1, 2.99003e-08, -8.21505e-08, 0, 0.939693, 0.34202, 8.74228e-08, 0.34202, -0.939693, 0, 3, -5)
+
+[editable path="Car"]

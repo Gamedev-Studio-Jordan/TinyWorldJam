@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1efraxy8iyel"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jcv8b"]
+albedo_color = Color(0.304103, 0.985582, 1.54018e-06, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_uhe7o"]
+material = SubResource("StandardMaterial3D_jcv8b")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c1k4s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_of7x6"]
+
+[node name="Planet" type="StaticBody3D"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_uhe7o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_c1k4s")
+
+[node name="Area3D" type="Area3D" parent="."]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.995, 0, 0, 0, 1.995, 0, 0, 0, 1.995, 0, 0, 0)
+shape = SubResource("SphereShape3D_of7x6")

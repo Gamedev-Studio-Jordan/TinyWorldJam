@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5r5w1kckcc6p"]
+
+[ext_resource type="PackedScene" uid="uid://dlpvj2moncf7p" path="res://car.tscn" id="1_uhe7o"]
+[ext_resource type="PackedScene" uid="uid://c1efraxy8iyel" path="res://planet.tscn" id="2_c1k4s"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_of7x6"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_uhe7o"]
+sky_material = SubResource("ProceduralSkyMaterial_of7x6")
+
+[sub_resource type="Environment" id="Environment_c1k4s"]
+background_mode = 2
+sky = SubResource("Sky_uhe7o")
+tonemap_mode = 2
+
+[node name="Overview" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c1k4s")
+
+[node name="Planet" parent="." instance=ExtResource("2_c1k4s")]
+
+[node name="Car" parent="." instance=ExtResource("1_uhe7o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 53.7248, 0)
