@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bitww0b13hvwl"]
+[gd_scene load_steps=6 format=3 uid="uid://cqssbrt3rfj1h"]
 
-[ext_resource type="PackedScene" uid="uid://cmoegd3ikx2bm" path="res://car.tscn" id="1_uhe7o"]
-[ext_resource type="PackedScene" uid="uid://ccfjskdcd24po" path="res://planet.tscn" id="2_c1k4s"]
+[ext_resource type="PackedScene" uid="uid://bn6v3kb36n0xk" path="res://car.tscn" id="1_uhe7o"]
+[ext_resource type="PackedScene" uid="uid://cpptq3kke87da" path="res://planet.tscn" id="2_c1k4s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_of7x6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
