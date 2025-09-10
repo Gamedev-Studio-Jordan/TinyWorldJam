@@ -90,11 +90,14 @@ void vertex() {
 	vec3 n_out5p0 = VERTEX;
 
 
+// Input:12
+	vec3 n_out12p0 = NODE_POSITION_WORLD;
+
+
 // VectorDecompose:13
-	vec3 n_in13p0 = vec3(0.00000, 0.00000, 0.00000);
-	float n_out13p0 = n_in13p0.x;
-	float n_out13p1 = n_in13p0.y;
-	float n_out13p2 = n_in13p0.z;
+	float n_out13p0 = n_out12p0.x;
+	float n_out13p1 = n_out12p0.y;
+	float n_out13p2 = n_out12p0.z;
 
 
 // VectorCompose:14
@@ -119,10 +122,13 @@ void vertex() {
 	n_out8p0 = texture(WindNoise, n_out10p0);
 
 
+// Input:2
+	vec2 n_out2p0 = UV;
+
+
 // VectorDecompose:3
-	vec2 n_in3p0 = vec2(0.00000, 0.00000);
-	float n_out3p0 = n_in3p0.x;
-	float n_out3p1 = n_in3p0.y;
+	float n_out3p0 = n_out2p0.x;
+	float n_out3p1 = n_out2p0.y;
 
 
 // FloatFunc:4
@@ -218,16 +224,16 @@ nodes/vertex/10/position = Vector2(-640, -520)
 nodes/vertex/11/node = SubResource("VisualShaderNodeInput_a4ob5")
 nodes/vertex/11/position = Vector2(-1320, -380)
 nodes/vertex/12/node = SubResource("VisualShaderNodeInput_baq0v")
-nodes/vertex/12/position = Vector2(-1880, -620)
+nodes/vertex/12/position = Vector2(-1980, -620)
 nodes/vertex/13/node = SubResource("VisualShaderNodeVectorDecompose_rbo3d")
-nodes/vertex/13/position = Vector2(-1520, -620)
+nodes/vertex/13/position = Vector2(-1580, -620)
 nodes/vertex/14/node = SubResource("VisualShaderNodeVectorCompose_u4lbx")
 nodes/vertex/14/position = Vector2(-1300, -640)
 nodes/vertex/15/node = SubResource("VisualShaderNodeVectorOp_h3f66")
 nodes/vertex/15/position = Vector2(-960, -600)
 nodes/vertex/16/node = SubResource("VisualShaderNodeVectorOp_we7hk")
-nodes/vertex/16/position = Vector2(560, 220)
-nodes/vertex/connections = PackedInt32Array(3, 1, 4, 0, 7, 0, 8, 2, 4, 0, 9, 1, 8, 0, 9, 0, 13, 0, 14, 0, 13, 2, 14, 1, 14, 0, 15, 0, 15, 0, 10, 2, 9, 0, 16, 0, 16, 0, 6, 1, 10, 0, 8, 0, 6, 0, 0, 0, 5, 0, 6, 0, 11, 0, 15, 1)
+nodes/vertex/16/position = Vector2(460, 200)
+nodes/vertex/connections = PackedInt32Array(3, 1, 4, 0, 7, 0, 8, 2, 4, 0, 9, 1, 8, 0, 9, 0, 13, 0, 14, 0, 13, 2, 14, 1, 14, 0, 15, 0, 15, 0, 10, 2, 9, 0, 16, 0, 16, 0, 6, 1, 10, 0, 8, 0, 6, 0, 0, 0, 5, 0, 6, 0, 11, 0, 15, 1, 12, 0, 13, 0, 2, 0, 3, 0)
 nodes/fragment/2/node = SubResource("VisualShaderNodeVectorCompose_45nfk")
 nodes/fragment/2/position = Vector2(0, 580)
 nodes/fragment/3/node = SubResource("VisualShaderNodeFloatConstant_0ifrx")

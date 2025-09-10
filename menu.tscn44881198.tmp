@@ -5688,19 +5688,6 @@ material_override = SubResource("ShaderMaterial_kk3ma")
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_nrnbx")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-
-[node name="fade_out" type="AnimationPlayer" parent="ColorRect"]
-libraries = {
-&"": SubResource("AnimationLibrary_kk3ma")
-}
-
 [node name="Control" type="Control" parent="." node_paths=PackedStringArray("car_start_animation", "fade_out_animation")]
 layout_mode = 3
 anchors_preset = 15
@@ -5710,8 +5697,22 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_ytr4m")
 car_start_animation = NodePath("../Background/Car/start_animation")
-fade_out_animation = NodePath("../ColorRect/fade_out")
+fade_out_animation = NodePath("ColorRect/fade_out")
 metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="fade_out" type="AnimationPlayer" parent="Control/ColorRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_kk3ma")
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
