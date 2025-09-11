@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdkogx4xku6gx"]
+
+[ext_resource type="Script" uid="uid://di1rpxlrwgwba" path="res://car_camera.gd" id="1_v4cpw"]
+
+[node name="CarCamera" type="Camera3D"]
+transform = Transform3D(-1, 2.99004e-08, -8.21508e-08, -1.27055e-20, 0.939693, 0.342019, 8.7423e-08, 0.342019, -0.939693, 0, 0, 0)
+top_level = true
+script = ExtResource("1_v4cpw")
+smooth_speed = 5.0

@@ -5,8 +5,8 @@ class_name Car extends RigidBody3D
 @onready var car_mesh: MeshInstance3D = $Car/Car
 
 @export_category("Car")
-@export var speed_force: float
-@export var turn_degree: float
+var speed_force: float
+var turn_degree: float
 @export var acceleration: float = 30
 @export var steering: float = 1.5
 @export var effect_turn_speed: float = 0.1
@@ -28,8 +28,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	car.global_position = global_position - Vector3(0, 0.1, 0)
 	
-	speed_force = Input.get_axis("front", "back") * acceleration
-	turn_degree = Input.get_axis("right", "left") * deg_to_rad(steering)
+	var back_front_axis = Input.get_axis("back", "front")
+	speed_force = back_front_axis * acceleration
+	turn_degree = Input.get_axis("right", "left") * deg_to_rad(steering) if back_front_axis != 0.0 else 0.0
 	
 	_curve_effect(delta)
 	
@@ -73,3 +74,10 @@ func draw_line(force: Vector3, line: Line3D) -> void:
 	if line:
 		line.set_start(global_position)
 		line.set_end(global_position + force)
+
+func get_car_up() -> Vector3:
+	return car.global_transform.basis.y
+
+func get_direction_car_is_facing() -> Vector3:
+	draw_line(car_mesh.global_transform.basis.z, debug_forward_line)
+	return car_mesh.global_transform.basis.z

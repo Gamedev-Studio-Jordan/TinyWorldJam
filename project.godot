@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="New Game Project"
-run/main_scene="uid://bitww0b13hvwl"
+run/main_scene="uid://cqssbrt3rfj1h"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,7 +21,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/destruction/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
