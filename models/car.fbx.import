@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://8hchh38rffnq"
-path="res://.godot/imported/Car.fbx-45d6dd9efe8d22011d697e0855ce8279.scn"
+path="res://.godot/imported/car.fbx-e1ad92e553a7fb0d9872691e5c36b649.scn"
 
 [deps]
 
-source_file="res://Car.fbx"
-dest_files=["res://.godot/imported/Car.fbx-45d6dd9efe8d22011d697e0855ce8279.scn"]
+source_file="res://models/car.fbx"
+dest_files=["res://.godot/imported/car.fbx-e1ad92e553a7fb0d9872691e5c36b649.scn"]
 
 [params]
 
