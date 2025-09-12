@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqssbrt3rfj1h"]
+
+[ext_resource type="PackedScene" uid="uid://bn6v3kb36n0xk" path="res://car.tscn" id="1_uhe7o"]
+[ext_resource type="PackedScene" uid="uid://cpptq3kke87da" path="res://planet.tscn" id="2_c1k4s"]
+[ext_resource type="ArrayMesh" uid="uid://s1ia1o7ss2dw" path="res://car_mesh.res" id="2_ne6cc"]
+[ext_resource type="PackedScene" uid="uid://8hchh38rffnq" path="res://Car.fbx" id="3_ne6cc"]
+[ext_resource type="PackedScene" uid="uid://bdkogx4xku6gx" path="res://car_camera.tscn" id="5_cu8wc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_of7x6"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_uhe7o"]
+sky_material = SubResource("ProceduralSkyMaterial_of7x6")
+
+[sub_resource type="Environment" id="Environment_c1k4s"]
+background_mode = 2
+sky = SubResource("Sky_uhe7o")
+tonemap_mode = 2
+
+[sub_resource type="MultiMesh" id="MultiMesh_uhe7o"]
+transform_format = 1
+instance_count = 4
+visible_instance_count = 4
+mesh = ExtResource("2_ne6cc")
+buffer = PackedFloat32Array(1.02857e-38, 7.71431e-39, 1.01021e-38, 7.98986e-39, 1.04694e-38, 9.1837e-39, 8.90815e-39, 8.44902e-39, 9.45912e-39, 9.18371e-39, 1.06531e-38, 9.27551e-39, 9.64287e-39, 1.01939e-38, 8.44903e-39, 1.08367e-38, 1.04694e-38, 9.64289e-39, 1.09286e-38, 1.0653e-38, 9.09188e-39, 4.13275e-39, 9.18369e-39, 1.06531e-38, 1.06531e-38, 1.06531e-38, 4.13274e-39, 8.90812e-39, 9.3673e-39, 4.59191e-39, 8.90812e-39, 4.59185e-39, 4.40818e-39, 9.09185e-39, 4.59184e-39, 5.05102e-39, 4.50001e-39, 9.18362e-39, 4.77553e-39, 5.14293e-39, 9.09178e-39, 4.50001e-39, 4.68375e-39, 9.09178e-39, 9.4592e-39, 4.59184e-39, 5.2347e-39, 5.14286e-39)
+
+[node name="Overview" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c1k4s")
+
+[node name="Planet" parent="." instance=ExtResource("2_c1k4s")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, -5, 0)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Planet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000349157, 0.531899, 0)
+multimesh = SubResource("MultiMesh_uhe7o")
+
+[node name="Car" parent="Planet" instance=ExtResource("3_ne6cc")]
+transform = Transform3D(-0.0028042, 0.0198024, 0, -0.0198024, -0.0028042, 0, 0, 0, 0.02, -0.0365992, 0.487966, 0.0208302)
+
+[node name="Car2" parent="Planet" instance=ExtResource("3_ne6cc")]
+transform = Transform3D(0.00192048, 0.0133216, -0.0147935, -0.0165978, 0.00927769, 0.00619986, 0.0109921, 0.0116816, 0.0119463, -0.0117727, 0.487966, 0.0914213)
+
+[node name="Car" parent="." instance=ExtResource("1_uhe7o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.302, 0)
+
+[node name="CarCamera" parent="." node_paths=PackedStringArray("car") instance=ExtResource("5_cu8wc")]
+transform = Transform3D(-1, 5.16435e-08, -1.4189e-07, -1.27055e-20, 0.939693, 0.342019, 1.50996e-07, 0.342019, -0.939693, 0, 1.5, -2.5)
+car = NodePath("../Car")
+
+[editable path="Planet"]
