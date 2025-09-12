@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqssbrt3rfj1h"]
+[gd_scene load_steps=11 format=3 uid="uid://cqssbrt3rfj1h"]
 
 [ext_resource type="PackedScene" uid="uid://cpptq3kke87da" path="res://scenes/planet.tscn" id="1_64s55"]
 [ext_resource type="ArrayMesh" uid="uid://s1ia1o7ss2dw" path="res://models/car_mesh.res" id="2_kmwmr"]
 [ext_resource type="PackedScene" uid="uid://8hchh38rffnq" path="res://models/car.fbx" id="3_wsv40"]
 [ext_resource type="PackedScene" uid="uid://bn6v3kb36n0xk" path="res://scenes/car.tscn" id="4_poc3d"]
 [ext_resource type="PackedScene" uid="uid://bdkogx4xku6gx" path="res://scenes/car_camera.tscn" id="5_bmlk8"]
+[ext_resource type="PackedScene" uid="uid://c4pmlvley572" path="res://scenes/objects/prototype_box.tscn" id="6_kmwmr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_of7x6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -53,5 +54,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.302, 0)
 [node name="CarCamera" parent="." node_paths=PackedStringArray("car") instance=ExtResource("5_bmlk8")]
 transform = Transform3D(-1, 5.16435e-08, -1.4189e-07, -1.27055e-20, 0.939693, 0.342019, 1.50996e-07, 0.342019, -0.939693, 0, 1.5, -2.5)
 car = NodePath("../Car")
+
+[node name="PrototypeBox" parent="." instance=ExtResource("6_kmwmr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.63432, 19.6191, -2.38561)
 
 [editable path="Planet"]
