@@ -1,0 +1,100 @@
+[gd_scene load_steps=14 format=3 uid="uid://cqssbrt3rfj1h"]
+
+[ext_resource type="PackedScene" uid="uid://cpptq3kke87da" path="res://scenes/planet.tscn" id="1_3aqo6"]
+[ext_resource type="Script" uid="uid://d0aw5s1g8i4xu" path="res://scripts/level.gd" id="1_rlct4"]
+[ext_resource type="ArrayMesh" uid="uid://s1ia1o7ss2dw" path="res://models/car_mesh.res" id="2_rlct4"]
+[ext_resource type="PackedScene" uid="uid://8hchh38rffnq" path="res://models/car.fbx" id="3_earhg"]
+[ext_resource type="PackedScene" uid="uid://bn6v3kb36n0xk" path="res://scenes/car.tscn" id="4_u6ue0"]
+[ext_resource type="PackedScene" uid="uid://bdkogx4xku6gx" path="res://scenes/car_camera.tscn" id="5_fal5o"]
+[ext_resource type="PackedScene" uid="uid://c4pmlvley572" path="res://scenes/objects/prototype_box.tscn" id="6_b0lsh"]
+[ext_resource type="Theme" uid="uid://cx6i23va8dpxu" path="res://resources/themes/level_ui.tres" id="8_earhg"]
+[ext_resource type="Script" uid="uid://c1fw2u26hpw58" path="res://scripts/ui/level_ui.gd" id="8_u6ue0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_of7x6"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_uhe7o"]
+sky_material = SubResource("ProceduralSkyMaterial_of7x6")
+
+[sub_resource type="Environment" id="Environment_c1k4s"]
+background_mode = 2
+sky = SubResource("Sky_uhe7o")
+tonemap_mode = 2
+
+[sub_resource type="MultiMesh" id="MultiMesh_uhe7o"]
+transform_format = 1
+instance_count = 4
+visible_instance_count = 4
+mesh = ExtResource("2_rlct4")
+buffer = PackedFloat32Array(1.02857e-38, 7.71431e-39, 1.01021e-38, 7.98986e-39, 1.04694e-38, 9.1837e-39, 8.90815e-39, 8.44902e-39, 9.45912e-39, 9.18371e-39, 1.06531e-38, 9.27551e-39, 9.64287e-39, 1.01939e-38, 8.44903e-39, 1.08367e-38, 1.04694e-38, 9.64289e-39, 1.09286e-38, 1.0653e-38, 9.09188e-39, 4.13275e-39, 9.18369e-39, 1.06531e-38, 1.06531e-38, 1.06531e-38, 4.13274e-39, 8.90812e-39, 9.3673e-39, 4.59191e-39, 8.90812e-39, 4.59185e-39, 4.40818e-39, 9.09185e-39, 4.59184e-39, 5.05102e-39, 4.50001e-39, 9.18362e-39, 4.77553e-39, 5.14293e-39, 9.09178e-39, 4.50001e-39, 4.68375e-39, 9.09178e-39, 9.4592e-39, 4.59184e-39, 5.2347e-39, 5.14286e-39)
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_rlct4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c1k4s")
+
+[node name="Planet" parent="." instance=ExtResource("1_3aqo6")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, -5, 0)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Planet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000349157, 0.531899, 0)
+multimesh = SubResource("MultiMesh_uhe7o")
+
+[node name="BrokenCar" parent="Planet" instance=ExtResource("3_earhg")]
+transform = Transform3D(-0.0028042, 0.0198024, 0, -0.0198024, -0.0028042, 0, 0, 0, 0.02, -0.0365992, 0.487966, 0.0208302)
+
+[node name="BrokenCar2" parent="Planet" instance=ExtResource("3_earhg")]
+transform = Transform3D(0.00192048, 0.0133216, -0.0147935, -0.0165978, 0.00927769, 0.00619986, 0.0109921, 0.0116816, 0.0119463, -0.0117727, 0.487966, 0.0914213)
+
+[node name="Car" parent="." instance=ExtResource("4_u6ue0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.302, 0)
+
+[node name="CarCamera" parent="." node_paths=PackedStringArray("car") instance=ExtResource("5_fal5o")]
+transform = Transform3D(-1, 5.16435e-08, -1.4189e-07, -1.27055e-20, 0.939693, 0.342019, 1.50996e-07, 0.342019, -0.939693, 0, 1.5, -2.5)
+car = NodePath("../Car")
+
+[node name="PrototypeBox" parent="." instance=ExtResource("6_b0lsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.63432, 19.6191, -2.38561)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LevelUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("level")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_u6ue0")
+level = NodePath("../..")
+
+[node name="ScoreRTL" type="RichTextLabel" parent="CanvasLayer/LevelUI"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_right = 171.0
+offset_bottom = 40.0
+theme = ExtResource("8_earhg")
+text = "Points: 87/10"
+fit_content = true
+
+[node name="TimerRTL" type="RichTextLabel" parent="CanvasLayer/LevelUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme = ExtResource("8_earhg")
+text = "01:04.33"
+fit_content = true
+horizontal_alignment = 2
+
+[editable path="Planet"]
