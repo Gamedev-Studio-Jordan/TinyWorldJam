@@ -36,6 +36,7 @@ motion_mode = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Car/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_50v30")
+disabled = true
 
 [node name="Line3D" type="MeshInstance3D" parent="."]
 top_level = true

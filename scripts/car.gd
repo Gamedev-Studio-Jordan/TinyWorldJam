@@ -81,3 +81,6 @@ func get_car_up() -> Vector3:
 func get_direction_car_is_facing() -> Vector3:
 	draw_line(car_mesh.global_transform.basis.z, debug_forward_line)
 	return car_mesh.global_transform.basis.z
+
+func get_current_speed() -> float:
+	return linear_velocity.length()
