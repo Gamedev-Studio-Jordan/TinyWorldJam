@@ -1,10 +1,16 @@
-class_name Car extends RigidBody3D
+[gd_scene load_steps=5 format=3 uid="uid://b0u0llpjaitgv"]
+
+[ext_resource type="PackedScene" uid="uid://8hchh38rffnq" path="res://models/placeholder_car.fbx" id="1_eeupx"]
+[ext_resource type="Script" uid="uid://bevp5jme6piw0" path="res://scripts/line3d.gd" id="2_gr2u5"]
+
+[sub_resource type="GDScript" id="GDScript_qt2eu"]
+script/source = "class_name OldCar extends RigidBody3D
 
 ## This is the container of the car model and the camera
 @onready var car: Node3D = $Car
 @onready var car_mesh: MeshInstance3D = $Car/Car
 
-@export_category("Car")
+@export_category(\"Car\")
 var speed_force: float
 var turn_degree: float
 @export var acceleration: float = 30
@@ -12,7 +18,7 @@ var turn_degree: float
 @export var effect_turn_speed: float = 0.1
 @export var effect_turn_tilt: float = 0.75
 
-@export_category("Debug")
+@export_category(\"Debug\")
 @export var debug_force: bool = false
 @export var debug_force_line: Line3D = null
 @export var debug_forward_line: Line3D = null
@@ -22,15 +28,15 @@ var planet: Planet = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	car.top_level = true
-	planet = get_tree().get_first_node_in_group("planet")
+	planet = get_tree().get_first_node_in_group(\"planet\")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	car.global_position = global_position - Vector3(0, 0.1, 0)
 	
-	var back_front_axis = Input.get_axis("back", "front")
+	var back_front_axis = Input.get_axis(\"back\", \"front\")
 	speed_force = back_front_axis * acceleration
-	turn_degree = Input.get_axis("right", "left") * deg_to_rad(steering) if back_front_axis != 0.0 else 0.0
+	turn_degree = Input.get_axis(\"right\", \"left\") * deg_to_rad(steering) if back_front_axis != 0.0 else 0.0
 	
 	_curve_effect(delta)
 	
@@ -80,4 +86,37 @@ func get_car_up() -> Vector3:
 
 func get_direction_car_is_facing() -> Vector3:
 	draw_line(car_mesh.global_transform.basis.z, debug_forward_line)
-	return car_mesh.global_transform.basis.z
+	return car_mesh.global_transform.basis.z"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uhe7o"]
+radius = 0.1
+
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("debug_force_line", "debug_forward_line")]
+linear_damp = 6.0
+script = SubResource("GDScript_qt2eu")
+effect_turn_speed = 0.5
+debug_force_line = NodePath("Line3D")
+debug_forward_line = NodePath("Line3D2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_uhe7o")
+
+[node name="Car" parent="." instance=ExtResource("1_eeupx")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Car" parent="Car" index="0"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+
+[node name="Line3D" type="MeshInstance3D" parent="."]
+top_level = true
+skeleton = NodePath("../Car")
+script = ExtResource("2_gr2u5")
+metadata/_custom_type_script = "uid://bevp5jme6piw0"
+
+[node name="Line3D2" type="MeshInstance3D" parent="."]
+top_level = true
+skeleton = NodePath("../Car")
+script = ExtResource("2_gr2u5")
+metadata/_custom_type_script = "uid://bevp5jme6piw0"
+
+[editable path="Car"]

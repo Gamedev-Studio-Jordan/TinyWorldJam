@@ -1,4 +1,4 @@
-class_name Planet extends StaticBody3D
+class_name OldPlanet extends StaticBody3D
 
 @export var gravity: float = 9.8
 @export var gravity_area: Area3D = null

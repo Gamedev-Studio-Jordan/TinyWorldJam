@@ -1,6 +1,6 @@
-class_name CarCamera extends Camera3D
+class_name OldCarCamera extends Camera3D
 
-@export var car: Car = null
+@export var car: OldCar = null
 @export var distance_from_car: float = 10
 @export var enable_smoothing: bool = true
 @export var smooth_speed: float = 10.0
