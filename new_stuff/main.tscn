@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=3 uid="uid://bigxkgcnyq7n"]
+
+[ext_resource type="Script" uid="uid://d1lx08jrqer6b" path="res://new_stuff/player.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bk4sn183wkxyx" path="res://new_stuff/planet.gd" id="1_1bvp3"]
+[ext_resource type="Script" uid="uid://cytn8lby5nrje" path="res://new_stuff/gravity_area.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ofubrxne3hi6" path="res://new_stuff/car.fbx" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://2n3dh8lqqgvm" path="res://new_stuff/camera_group.gd" id="5_lquwl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_upm3i"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_23hlq"]
+sky_material = SubResource("ProceduralSkyMaterial_upm3i")
+
+[sub_resource type="Environment" id="Environment_ixt12"]
+background_mode = 2
+sky = SubResource("Sky_23hlq")
+tonemap_mode = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7dm0k"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ig7tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
+albedo_color = Color(0.662745, 1, 0.458824, 1)
+metallic_specular = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ixt12")
+
+[node name="Planet1" type="StaticBody3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0)
+script = ExtResource("1_1bvp3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet1"]
+shape = SubResource("SphereShape3D_7dm0k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Planet1"]
+mesh = SubResource("SphereMesh_ig7tw")
+surface_material_override/0 = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="GravityArea" type="Area3D" parent="Planet1" groups=["planet_gravity"]]
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+script = ExtResource("1_h2yge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet1/GravityArea"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_0xm2m")
+
+[node name="Player" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 103.148, 0)
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+angular_damp = 6.0
+script = ExtResource("1_0xm2m")
+engine_power = 600.0
+steering_power = 100.0
+
+[node name="FrontRayCast" type="RayCast3D" parent="Player"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.107222, 1.01144, -1.84465)
+
+[node name="RayCastFrontLeft" type="RayCast3D" parent="Player"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.455699, 1.01144, -1.47748)
+
+[node name="RayCastFrontRight" type="RayCast3D" parent="Player"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.472075, 1.01144, -1.42137)
+
+[node name="RayCastBackLeft" type="RayCast3D" parent="Player"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.425179, 1.01144, 1.27069)
+
+[node name="RayCastBackRight" type="RayCast3D" parent="Player"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.467031, 1.01144, 1.25171)
+
+[node name="car" parent="Player" instance=ExtResource("3_h2yge")]
+
+[node name="Cube" parent="Player/car" index="0"]
+transform = Transform3D(-4.37114e-06, -100, -4.37114e-06, 0, -4.37114e-06, 100, -100, 4.37114e-06, 1.91069e-13, 0, 0, 0)
+
+[node name="CameraGroup" type="Node3D" parent="Player/car"]
+script = ExtResource("5_lquwl")
+
+[node name="3rd-person" type="Camera3D" parent="Player/car/CameraGroup"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.43996, 5.45619)
+
+[node name="Top-Down" type="Camera3D" parent="Player/car/CameraGroup"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 9.14374, 1.51532)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154807, 0.014061, 0)
+shape = SubResource("SphereShape3D_h2yge")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 104.424, -6.43453)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_1bvp3")
+
+[editable path="Player/car"]

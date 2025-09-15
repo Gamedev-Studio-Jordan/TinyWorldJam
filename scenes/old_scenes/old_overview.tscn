@@ -1,22 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqssbrt3rfj1h"]
+[gd_scene load_steps=6 format=3 uid="uid://cqssbrt3rfj1h"]
 
 [ext_resource type="PackedScene" uid="uid://cpptq3kke87da" path="res://scenes/old_scenes/old_planet.tscn" id="1_64s55"]
 [ext_resource type="ArrayMesh" uid="uid://s1ia1o7ss2dw" path="res://models/placeholder_car_mesh.res" id="2_kmwmr"]
 [ext_resource type="PackedScene" uid="uid://8hchh38rffnq" path="res://models/placeholder_car.fbx" id="3_wsv40"]
-[ext_resource type="PackedScene" path="res://scenes/old_car.tscn" id="4_poc3d"]
 [ext_resource type="PackedScene" uid="uid://bdkogx4xku6gx" path="res://scenes/old_scenes/old_car_camera.tscn" id="5_bmlk8"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_of7x6"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-
-[sub_resource type="Sky" id="Sky_uhe7o"]
-sky_material = SubResource("ProceduralSkyMaterial_of7x6")
-
-[sub_resource type="Environment" id="Environment_c1k4s"]
-background_mode = 2
-sky = SubResource("Sky_uhe7o")
-tonemap_mode = 2
 
 [sub_resource type="MultiMesh" id="MultiMesh_uhe7o"]
 transform_format = 1
@@ -27,15 +14,9 @@ buffer = PackedFloat32Array(1.02857e-38, 7.71431e-39, 1.01021e-38, 7.98986e-39, 
 
 [node name="Overview" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_c1k4s")
-
 [node name="Planet" parent="." instance=ExtResource("1_64s55")]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, -5, 0)
+script = null
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Planet"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000349157, 0.531899, 0)
@@ -47,8 +28,18 @@ transform = Transform3D(-0.0028042, 0.0198024, 0, -0.0198024, -0.0028042, 0, 0, 
 [node name="Car2" parent="Planet" instance=ExtResource("3_wsv40")]
 transform = Transform3D(0.00192048, 0.0133216, -0.0147935, -0.0165978, 0.00927769, 0.00619986, 0.0109921, 0.0116816, 0.0119463, -0.0117727, 0.487966, 0.0914213)
 
-[node name="Car" parent="." instance=ExtResource("4_poc3d")]
+[node name="Car" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.302, 0)
+script = null
 
 [node name="CarCamera" parent="." node_paths=PackedStringArray("car") instance=ExtResource("5_bmlk8")]
 transform = Transform3D(-1, 5.16435e-08, -1.4189e-07, -1.27055e-20, 0.939693, 0.342019, 1.50996e-07, 0.342019, -0.939693, 0, 1.5, -2.5)
