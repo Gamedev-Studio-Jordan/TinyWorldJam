@@ -1,4 +1,4 @@
-extends RigidBody3D
+class_name Car extends RigidBody3D
 
 # Car properties
 @export var engine_power = 20.0

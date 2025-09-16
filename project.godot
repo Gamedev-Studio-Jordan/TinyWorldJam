@@ -59,8 +59,9 @@ switchcam={
 [layer_names]
 
 3d_physics/layer_1="Planet"
-3d_physics/layer_2="Car"
+3d_physics/layer_2="CarRigidbodyMovement"
 3d_physics/layer_3="Object"
+3d_physics/layer_4="CarModel"
 
 [rendering]
 
