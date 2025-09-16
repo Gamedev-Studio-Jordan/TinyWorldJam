@@ -1,12 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://yh0rlox8t2dx"]
 
 [ext_resource type="PackedScene" uid="uid://dwfx2yrkg860b" path="res://models/objects/box.glb" id="1_hwbtv"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hwbtv"]
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.34, 0.181333, 0, 1)
+[ext_resource type="Material" uid="uid://4m00gl73fa3k" path="res://resources/materials/box_model_material.tres" id="2_x1hh2"]
 
 [node name="box" instance=ExtResource("1_hwbtv")]
 
 [node name="Cube" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_hwbtv")
+surface_material_override/0 = ExtResource("2_x1hh2")

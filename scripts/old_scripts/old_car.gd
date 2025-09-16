@@ -17,7 +17,7 @@ var turn_degree: float
 @export var debug_force_line: Line3D = null
 @export var debug_forward_line: Line3D = null
 
-var planet: Planet = null
+var planet: OldPlanet = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
