@@ -91,22 +91,14 @@ func apply_engine_force(delta):
 # WORKING STEERING METHOD - Wheel force based steering
 func apply_steering(delta):
 	# Smooth steering input
-	current_steering = lerp(current_steering, steering, steering_response * delta)
+	current_steering = lerp(current_steering, -steering, steering_response * delta)
 	
 	# Only steer when moving and on ground
 	if is_on_ground and linear_velocity.length() > 0.5:
-		# Apply steering force at wheel positions for realistic turning
-		var steering_force = transform.basis.x * current_steering * steering_power
+		# Direct rotation steering - very effective
+		var turn_speed = current_steering * steering_power * delta * 2.0
+		global_rotate(Vector3.UP, turn_speed)
 		
-		# Apply force at front wheel positions for better turning
-		if front_left_raycast.is_colliding():
-			var front_left_pos = front_left_raycast.global_position - global_position
-			apply_force(steering_force, front_left_pos)
-		
-		if front_right_raycast.is_colliding():
-			var front_right_pos = front_right_raycast.global_position - global_position
-			apply_force(steering_force, front_right_pos)
-
 func apply_planetary_gravity(delta):
 	if current_planet:
 		# Calculate direction to planet center
@@ -179,7 +171,7 @@ func update_visual_effects():
 		return
 	
 	# Calculate tilt based on steering and speed
-	var tilt_amount = -current_steering * max_tilt_angle * min(linear_velocity.length() / 10.0, 1.0)
+	var tilt_amount = current_steering * max_tilt_angle * min(linear_velocity.length() / 10.0, 1.0)
 	
 	# Apply tilt to mesh
 	car_mesh.rotation.z = deg_to_rad(tilt_amount)
