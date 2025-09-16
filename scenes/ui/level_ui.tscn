@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2lx81nvacfu0"]
+
+[ext_resource type="Script" uid="uid://dhs5bel0hv3y3" path="res://scripts/ui/level_ui.gd" id="1_32a87"]
+[ext_resource type="Theme" uid="uid://cx6i23va8dpxu" path="res://scripts/resources/themes/level_ui.tres" id="2_ky048"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="LevelUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_32a87")
+
+[node name="ScoreRTL" type="RichTextLabel" parent="LevelUI"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_right = 171.0
+offset_bottom = 40.0
+theme = ExtResource("2_ky048")
+text = "Points: 87/10"
+fit_content = true
+
+[node name="TimerRTL" type="RichTextLabel" parent="LevelUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme = ExtResource("2_ky048")
+text = "01:04.33"
+fit_content = true
+horizontal_alignment = 2

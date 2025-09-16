@@ -23,7 +23,7 @@ shape = SubResource("ConvexPolygonShape3D_1c2mv")
 [node name="Destruction" type="Node" parent="." node_paths=PackedStringArray("shard_container")]
 script = ExtResource("3_5h37w")
 fragmented = ExtResource("3_ldgtc")
-shard_container = NodePath("../..")
+shard_container = NodePath("")
 collision_layer = 4
 collision_mask = 9
 
