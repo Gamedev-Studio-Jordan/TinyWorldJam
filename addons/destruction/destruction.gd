@@ -85,7 +85,8 @@ func _add_shard(original: MeshInstance3D, explosion_power: float) -> void:
 	var tween := get_tree().create_tween()
 	tween.set_parallel(true)
 	if fade_delay >= 0:
-		var material = original.mesh.surface_get_material(0)
+		var material : StandardMaterial3D = original.get_surface_override_material(0)
+		print(material.albedo_color)
 		if material is StandardMaterial3D:
 			if not material in _modified_materials:
 				var modified = material.duplicate()
