@@ -95,9 +95,9 @@ func apply_steering(delta):
 	
 	# Only steer when moving and on ground
 	if is_on_ground and linear_velocity.length() > 0.5:
-		# Direct rotation steering - very effective
+		var up_axis = (-current_gravity).normalized() if current_gravity.length() > 0.001 else Vector3.UP
 		var turn_speed = current_steering * steering_power * delta * 2.0
-		global_rotate(Vector3.UP, turn_speed)
+		global_rotate(up_axis, turn_speed)
 		
 func apply_planetary_gravity(delta):
 	if current_planet:
