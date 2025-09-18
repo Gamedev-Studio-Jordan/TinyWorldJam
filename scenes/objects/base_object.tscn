@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=4 uid="uid://c4pmlvley572"]
+
+[ext_resource type="Script" uid="uid://gk6l6wxkwpj" path="res://scripts/destructible_object.gd" id="1_ldgtc"]
+[ext_resource type="Script" uid="uid://l1g0d20ywk1x" path="res://addons/destruction/destruction.gd" id="3_5h37w"]
+[ext_resource type="PackedScene" uid="uid://bm1mfejoc7qh0" path="res://models/objects/box_fractured_model.tscn" id="3_ldgtc"]
+[ext_resource type="Material" uid="uid://4m00gl73fa3k" path="res://resources/materials/box_model_material.tres" id="4_xiusb"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1c2mv"]
+points = PackedVector3Array(-1, 0.76361, -1, -1, 2.76361, -1, 1, 0.76361, -1, -1, 0.76361, 1, -1, 2.76361, 1, 1, 2.76361, -1, 1, 0.76361, 1, 1, 2.76361, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kje8c"]
+resource_name = "Material"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_17226"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAAAEAAEAAwAFAAIABQAAAAIABgAEAAAABQAGAAAABwABAAQABwADAAEABgAHAAQABQADAAcABQAHAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAAAAP////8AAAAA//8AAAAAAAAAAP//AAD///////8AAAAAAAAAAAAA//8AAAAAAAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u6kxb"]
+resource_name = "box_Cube"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("/5//f//f/z//3/9//5//P/9f/z//nwAA/5//P/9fAAD/X////5//v/+f////X/+//x//f/9f/z//X/9//x//P/9f/3//n/8//5//f/9f/z//X/+//5//f/+f/7//X/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_kje8c"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAA//8AAP///////wAA//8AAP///////////////wAA////vwAA//////+//////////78AAAAA////vwAAAAD//1TVAAD//wAAVNUAAP////9U1QAAAAAAAFTVAAAAAAAA/7///wAA////v///AAAAAP+/AAAAAP///7///wAAAABU1f///////1TV/////wAAVNX//wAA//9U1QAAAAAAAP///////wAA//8AAP//AAD/////AAAAAP///3//v/9//7//f/+//3//v/////////////////////9U1VTVVNVU1VTVVNVU1VTVAAD/fwAA/38AAP9/AAD/f6oqqiqqKqoqqiqqKqoqqir/v/+//7//v/+//7//v/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_17226")
+
+[node name="BaseObject" type="RigidBody3D" node_paths=PackedStringArray("destruction_node") groups=["destructible"]]
+collision_layer = 4
+collision_mask = 13
+contact_monitor = true
+max_contacts_reported = 6
+script = ExtResource("1_ldgtc")
+destruction_node = NodePath("Destruction")
+explosion_power = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_1c2mv")
+
+[node name="Destruction" type="Node" parent="." node_paths=PackedStringArray("shard_container")]
+script = ExtResource("3_5h37w")
+fragmented = ExtResource("3_ldgtc")
+shard_container = NodePath("../..")
+collision_layer = 4
+collision_mask = 9
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76361, 0)
+mesh = SubResource("ArrayMesh_u6kxb")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("4_xiusb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
