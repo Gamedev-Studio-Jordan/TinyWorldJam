@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://cui3lck8wo1j5"]
+
+[ext_resource type="Script" uid="uid://2vchsu3h47pb" path="res://planet.gd" id="1_mtr83"]
+[ext_resource type="Script" uid="uid://h508bwmfeqvq" path="res://gravity_area.gd" id="2_a75xc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7dm0k"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ig7tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
+albedo_color = Color(0.662745, 1, 0.458824, 1)
+metallic_specular = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
+
+[node name="Planet" type="StaticBody3D"]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0)
+script = ExtResource("1_mtr83")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7dm0k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ig7tw")
+surface_material_override/0 = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="GravityArea" type="Area3D" parent="." groups=["planet_gravity"]]
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+script = ExtResource("2_a75xc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GravityArea"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_0xm2m")

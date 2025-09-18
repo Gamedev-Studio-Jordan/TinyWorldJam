@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://nflw6hsye0ym"]
+
+[ext_resource type="Script" uid="uid://df5yyrug6a4bi" path="res://player.gd" id="1_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://cb1qbpen0iy0r" path="res://car.fbx" id="2_hqtel"]
+[ext_resource type="Script" uid="uid://bl4klyyuyutx0" path="res://camera_group.gd" id="3_sweqy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
+
+[node name="Player" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+angular_damp = 6.0
+script = ExtResource("1_i3pqv")
+engine_power = 600.0
+
+[node name="FrontRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.107222, 1.01144, -1.84465)
+
+[node name="RayCastFrontLeft" type="RayCast3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.455699, 1.01144, -1.47748)
+
+[node name="RayCastFrontRight" type="RayCast3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.472075, 1.01144, -1.42137)
+
+[node name="RayCastBackLeft" type="RayCast3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.425179, 1.01144, 1.27069)
+
+[node name="RayCastBackRight" type="RayCast3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.467031, 1.01144, 1.25171)
+
+[node name="car" parent="." instance=ExtResource("2_hqtel")]
+
+[node name="Cube" parent="car" index="0"]
+transform = Transform3D(-4.37114e-06, -100, -4.37114e-06, 0, -4.37114e-06, 100, -100, 4.37114e-06, 1.91069e-13, 0, 0, 0)
+
+[node name="CameraGroup" type="Node3D" parent="car"]
+script = ExtResource("3_sweqy")
+
+[node name="3rd-person" type="Camera3D" parent="car/CameraGroup"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.43996, 5.45619)
+
+[node name="Top-Down" type="Camera3D" parent="car/CameraGroup"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 9.14374, 1.51532)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154807, 0.014061, 0)
+shape = SubResource("SphereShape3D_h2yge")
+
+[editable path="car"]

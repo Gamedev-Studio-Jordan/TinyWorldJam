@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm1mfejoc7qh0"]
+
+[ext_resource type="PackedScene" uid="uid://b4vqa2kyvf13b" path="res://models/objects/box_fractured.glb" id="1_6kopq"]
+[ext_resource type="Material" uid="uid://4m00gl73fa3k" path="res://resources/materials/box_model_material.tres" id="2_u1kod"]
+
+[node name="box_fractured" instance=ExtResource("1_6kopq")]
+
+[node name="Cube_cell" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_u1kod")
+
+[node name="Cube_cell_001" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_u1kod")
+
+[node name="Cube_cell_002" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_u1kod")
+
+[node name="Cube_cell_003" parent="." index="3"]
+surface_material_override/0 = ExtResource("2_u1kod")
+
+[node name="Cube_cell_004" parent="." index="4"]
+surface_material_override/0 = ExtResource("2_u1kod")
+
+[node name="Cube_cell_005" parent="." index="5"]
+surface_material_override/0 = ExtResource("2_u1kod")
